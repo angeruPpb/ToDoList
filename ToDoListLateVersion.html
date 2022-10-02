@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ToDoList</title>    
+		<script>
+		document.addEventListener('DOMContentLoaded', () => 
+		{  
+			var iterador = 100;
+		   document.querySelector('#new-task').onsubmit = () => 
+		   {
+					const cb = document.createElement("INPUT");
+	      	const db = document.createElement("INPUT");
+					cb.setAttribute("type", "checkbox");
+	    	  cb.setAttribute("id", "tachar");
+	       	db.setAttribute("type", "checkbox");
+	       	db.setAttribute("id", "borrar");
+					const li = document.createElement('li');
+					li.appendChild(cb);
+					li.innerHTML += document.querySelector('#task').value;
+	        li.appendChild(db);
+					document.querySelector('#tasks').append(li);
+					document.querySelector('#task').value = '';
+
+					var nodos = document.querySelectorAll("li");
+
+					document.querySelector('#Done').onclick = () => 
+		  		{	
+		  			for (var i = 0; i < iterador; i++) 
+		        	{
+		   		 		var direct = nodos[i];
+		   		 		var box = direct.querySelector('#tachar');
+		   		 		box.checked = true;
+		        	}
+					}
+	        document.addEventListener('click', function(ev) 
+		      {
+		        for (var i = 0; i < iterador; i++) 
+		        {
+		   		 		var direct = nodos[i];
+		   		 		var box = direct.querySelector('#tachar');
+		   		 		var box2 = direct.querySelector('#borrar');
+
+		   		 		if (box.checked === true && box2.checked === true)
+		   		 		{
+		   		 			direct.remove();
+		   		 		}
+			  			else if (box.checked === true)
+			   		 	{
+			   		 		direct.style.textDecoration = "line-through";
+			   		 	}
+			   		 	else if (box2.checked === true)
+			   		 	{						
+			   		 		direct.remove();
+			   		 	}
+			   		 	else
+			   		 	{
+			   		 		direct.style.textDecoration = "";
+			   		 	}
+		        }
+					},false);
+				return false;
+		 	};    	
+		});
+		</script>
+  </head>
+	<body>
+	    <p>Computer Science - CCOMP3-1</p>
+			<h1>To Do List</h1>
+			<form id="new-task">
+				<input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
+				<input type="submit"><br>
+			</form>
+			<ol id="tasks">
+			</ol><br>
+		<button class="button" id="Done">All Done!!!!</button>
+	</body>
+</html>
